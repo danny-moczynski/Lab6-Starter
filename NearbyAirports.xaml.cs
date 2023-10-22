@@ -1,9 +1,9 @@
-﻿namespace Lab6_Starter;
+namespace Temp;
 
 public partial class NearbyAirports : ContentPage
 {
-    public NearbyAirports()
-    {
-        InitializeComponent();
-    }
+	public NearbyAirports()
+	{
+		InitializeComponent();
+	}
 }

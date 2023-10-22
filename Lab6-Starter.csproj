@@ -100,4 +100,9 @@
 	  <MauiXaml Update="Weather.xaml">
 	  </MauiXaml>
 	</ItemGroup>
+	<ItemGroup>
+	  <MauiXaml Update="NearbyAirports.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
 </Project>
