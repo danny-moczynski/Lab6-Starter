@@ -25,11 +25,11 @@
             />
         </Grid>
         <Grid ColumnDefinitions="*, *" ColumnSpacing="-175">
-            <Label 
+            <Label
                 Grid.Column="0"
                 Text="Nearby"
                 FontSize="20"
-                VerticalOptions="Center" 
+                VerticalOptions="Center"
             />
             <Label
                 Grid.Column="1"
@@ -38,18 +38,68 @@
             />
         </Grid>
 
-        <CollectionView x:Name="CV" ItemsSource="{Binding Airports}" SelectionMode="Single">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="model:Airport">
-                        <Grid RowDefinitions="*" ColumnDefinitions="*,*,*">
-                            <Label Grid.Column="0" Text="{Binding Id}" VerticalTextAlignment="Center"/>
-                            <Label Grid.Column="1" Text="{Binding City}" VerticalTextAlignment="Center"/>
-                            <Label Grid.Column="2" Text="{Binding DateVisited}" VerticalTextAlignment="Center" />
-                            
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+        <Frame BorderColor="Black" Padding="5">
+            <Grid ColumnDefinitions="*, *, *">
+                <StackLayout Grid.Column="0" Padding="10">
+                    <Label Text="MKE"></Label>
+                </StackLayout>
 
+                <StackLayout Grid.Column="1" Padding="10">
+                    <Label Text="Milwaukee"></Label>
+                </StackLayout>
+
+                <StackLayout Grid.Column="2" Padding="10" Margin="50, 0, 0, 0">
+                    <Label Text="100.0"></Label>
+                </StackLayout>
+            </Grid>
+        </Frame>
+
+        <Frame BorderColor="Black" Padding="5">
+            <Grid ColumnDefinitions="*, *, *">
+                <StackLayout Grid.Column="0" Padding="10">
+                    <Label Text="OSH"></Label>
+                </StackLayout>
+
+                <StackLayout Grid.Column="1" Padding="10">
+                    <Label Text="Oshkosh"></Label>
+                </StackLayout>
+
+                <StackLayout Grid.Column="2" Padding="10" Margin="50, 0, 0, 0">
+                    <Label Text="0.0"></Label>
+                </StackLayout>
+            </Grid>
+        </Frame>
+
+        <Frame BorderColor="Black" Padding="5">
+            <Grid ColumnDefinitions="*, *, *">
+                <StackLayout Grid.Column="0" Padding="10">
+                    <Label Text="AUW"></Label>
+                </StackLayout>
+
+                <StackLayout Grid.Column="1" Padding="10">
+                    <Label Text="Wausau"></Label>
+                </StackLayout>
+
+                <StackLayout Grid.Column="2" Padding="10" Margin="50, 0, 0, 0">
+                    <Label Text="100.0"></Label>
+                </StackLayout>
+            </Grid>
+        </Frame>
+
+        <Frame BorderColor="Black" Padding="5">
+            <Grid ColumnDefinitions="*, *, *">
+                <StackLayout Grid.Column="0" Padding="10">
+                    <Label Text="ATW"></Label>
+                </StackLayout>
+
+                <StackLayout Grid.Column="1" Padding="10">
+                    <Label Text="Appleton"></Label>
+                </StackLayout>
+
+                <StackLayout Grid.Column="2" Padding="10" Margin="50, 0, 0, 0">
+                    <Label Text="30.0"></Label>
+                </StackLayout>
+            </Grid>
+        </Frame>
     </VerticalStackLayout>
 </ContentPage>
