@@ -4,9 +4,9 @@ public partial class App : Application
 {
 	public App()
 	{
-		InitializeComponent();
+		//InitializeComponent();
 
-		MainPage = new MainTabbedPage();
+		MainPage = new NearbyAirports();
 	}
 }
 
