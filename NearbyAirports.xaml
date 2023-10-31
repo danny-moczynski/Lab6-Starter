@@ -5,7 +5,7 @@
              x:DataType="model:BusinessLogic"
              x:Class="Lab6_Starter.NearbyAirports"
              Title="NearbyAirports">
-    <VerticalStackLayout
+       <VerticalStackLayout
        Padding="25, 20"
        Spacing="20"
    >
