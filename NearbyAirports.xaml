@@ -5,10 +5,9 @@
              x:DataType="model:BusinessLogic"
              x:Class="Lab6_Starter.NearbyAirports"
              Title="NearbyAirports">
-       <VerticalStackLayout
+    <VerticalStackLayout
        Padding="25, 20"
-       Spacing="20"
-   >
+       Spacing="20">
         <Grid ColumnDefinitions=".25*, .5*" ColumnSpacing="-260">
             <Label
                Grid.Column="0"
