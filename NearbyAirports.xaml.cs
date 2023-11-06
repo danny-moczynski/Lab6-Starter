@@ -1,4 +1,5 @@
-﻿namespace Lab6_Starter;
+namespace Lab6_Starter;
+
 
 public partial class NearbyAirports : ContentPage
 {
