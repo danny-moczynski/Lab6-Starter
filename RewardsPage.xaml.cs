@@ -8,7 +8,10 @@ public partial class RewardsPage : ContentPage
 
     }
 
-   
+   public void OnSubmitButtonClicked(object sender, EventArgs e)
+    {
+
+    }
 }
 
 
