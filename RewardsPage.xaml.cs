@@ -28,7 +28,7 @@ public partial class RewardsPage : ContentPage
 
     public void OnSubmitButtonClicked(object sender, EventArgs e)
     {
-
+        // This button should work only if they have enough airports visited for a reward status to be met
     }
 }
 

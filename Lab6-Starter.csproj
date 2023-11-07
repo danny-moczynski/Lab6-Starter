@@ -84,17 +84,6 @@
 	  <BundleResource Include="Resources\Images\tools.png" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Compile Update="PlanningTools.xaml.cs">
-	    <DependentUpon>PlanningTools.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="RewardsPage.xaml.cs">
-	    <DependentUpon>RewardsPage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Weather.xaml.cs">
-	    <DependentUpon>Weather.xaml</DependentUpon>
-	  </Compile>
-	</ItemGroup>
-	<ItemGroup>
 	  <MauiXaml Update="Map.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
