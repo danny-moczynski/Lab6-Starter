@@ -21,6 +21,11 @@ public class BusinessLogic : IBusinessLogic
         get { return GetAirports(); }
 
     }
+    public ObservableCollection<Resource> Resources
+    {
+        get { return GetResources(); }
+
+    }
     public BusinessLogic(IDatabase? db)
     {
         this.db = db;
@@ -153,6 +158,9 @@ public class BusinessLogic : IBusinessLogic
         return db.SelectAllAirports();
     }
 
-
+    public ObservableCollection<Resource> GetResources()
+    {
+        return db.SelectAllResources();
+    }
 }
 

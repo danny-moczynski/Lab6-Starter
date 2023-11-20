@@ -75,9 +75,6 @@
 	  <None Remove="Resources\Images\tools.png" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Model\" />
-	</ItemGroup>
-	<ItemGroup>
 	  <BundleResource Include="Resources\Images\trash.png" />
 	  <BundleResource Include="Resources\Images\rectangle_list_48.png" />
 	  <BundleResource Include="Resources\Images\close.png" />
