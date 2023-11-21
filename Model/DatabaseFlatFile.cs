@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.Json;
 using System.Collections.ObjectModel;
+using Npgsql;
 
 // https://www.dotnetperls.com/serialize-list
 // https://www.daveoncsharp.com/2009/07/xml-serialization-of-collections/
@@ -16,6 +17,7 @@ public class DatabaseFlatFile : IDatabase
     const String filename = "airports.db";
     String airportsFile;
     ObservableCollection<Airport> airports;
+    ObservableCollection<Resource> resources = new();
     JsonSerializerOptions options;
 
     public DatabaseFlatFile ()
@@ -61,6 +63,10 @@ public class DatabaseFlatFile : IDatabase
         return airports;
     }
 
+    public ObservableCollection<Resource> SelectAllResources()
+    {
+        return resources;
+    }
     public Airport? SelectAirport(String id)
     {
         foreach (Airport airport in airports)
