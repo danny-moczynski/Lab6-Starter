@@ -114,8 +114,11 @@ public partial class Database : IDatabase
             Console.WriteLine(resourceToAdd);
         }
 
-    // Finds the airport with the given id, null if not found
-    public Airport SelectAirport(String id)
+        return resources;
+    }
+
+    // Finds the airport (among those visited) with the given id, null if not found
+    public Airport SelectAirport(String id, String userId)
     {
         Airport airportToAdd = null;
         var conn = new NpgsqlConnection(connString);
