@@ -34,6 +34,9 @@
 	  <CreatePackage>false</CreatePackage>
 	</PropertyGroup>
 	<ItemGroup>
+	  <MauiImage Remove="Resources\Images\magnifyingglasssolid.svg" />
+	</ItemGroup>
+	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 
@@ -55,9 +58,10 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Maui.Controls.Maps" Version="7.0.96" />
 		<PackageReference Include="Npgsql" Version="7.0.6" />
-		<PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+		<!--PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" /-->
 		<PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="7.0.0" />
 		<PackageReference Include="CommunityToolkit.Maui" Version="6.0.0" />
+		<PackageReference Include="RestSharp" Version="110.2.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -73,6 +77,10 @@
 	  <None Remove="Resources\Images\trash.png" />
 	  <None Remove="Resources\Images\rectangle-list_48.png" />
 	  <None Remove="Resources\Images\tools.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Databases/" />
+	  <Folder Include="Model\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <BundleResource Include="Resources\Images\trash.png" />
