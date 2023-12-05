@@ -1,6 +1,7 @@
 using Microsoft.Maui.Controls;
 using System;
 using System.Collections.Generic;
+
 namespace Lab6_Starter;
 public partial class ResourcesPage : ContentPage
 {
@@ -22,6 +23,14 @@ public partial class ResourcesPage : ContentPage
 
         collectionView.ItemsSource = urlList;
 
+    }
+
+    async void GoToPageAsync(Object sender, EventArgs e)
+    {
+        if (sender is Button button && button.Text is string url)
+        {
+            await Launcher.OpenAsync(url);
+        }
     }
 
     /// <summary>
