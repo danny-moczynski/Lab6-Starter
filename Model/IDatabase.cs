@@ -1,12 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
+//TODO: Refactor to account for change in name of table - airports => visited_airports and introduction of user_id
 namespace Lab6_Starter.Model
 {
     public interface IDatabase
     {
-        ObservableCollection<Airport> SelectAllAirports();
-        Airport SelectAirport(String id);
+
+        ObservableCollection<Airport> SelectAllAirports(String userId);
+        Airport SelectAirport(String id, String userId);
+        ObservableCollection<Airport> SelectAllWiAirports();
+        Airport SelectWisconsinAirport(String id);
         AirportAdditionError InsertAirport(Airport airport);
         AirportDeletionError DeleteAirport(Airport airport);
         AirportEditError UpdateAirport(Airport replacementAirport);

@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Collections.ObjectModel;
+using System.Runtime.Intrinsics.Arm;
+using System.ComponentModel;
+using System.Linq;
 using Lab6_Starter;
 
 namespace Lab6_Starter.Model;
 
-
-public class BusinessLogic : IBusinessLogic
+/// <summary>
+/// This class implements the BusinessLogic
+/// </summary>
+public partial class BusinessLogic : IBusinessLogic, INotifyPropertyChanged
 {
     const int BRONZE_LEVEL = 42;
     const int SILVER_LEVEL = 84;
@@ -14,40 +20,54 @@ public class BusinessLogic : IBusinessLogic
 
 
     IDatabase db;
-    private readonly int MAX_RATING = 5;
+    private const int MIN_RATING = 1;
+    private const int MAX_RATING = 5;
+    private const int MIN_ID_LENGTH = 3;
+    private const int MAX_ID_LENGTH = 4;
+
+    public String UserId {get;set;} // by introducing this as a property, we don't have to change the UI too much
+    public event PropertyChangedEventHandler PropertyChanged;
 
     public ObservableCollection<Airport> Airports
     {
         get { return GetAirports(); }
 
     }
+
     public ObservableCollection<Resource> Resources
     {
         get { return GetResources(); }
 
     }
-    public BusinessLogic(IDatabase? db)
-    {
-        this.db = db;
-    }
 
+    protected virtual void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+    
 
     public Airport FindAirport(String id)
     {
-        return db.SelectAirport(id);
+        return db.SelectAirport(id, UserId);
     }
-
+/// <summary>
+/// Checks to make sure that all airport fields are legitimate
+/// </summary>
+/// <param name="id">id of airport to ad"></param>
+/// <param name="dateVisited">date visited</param>
+/// <param name="rating">rating, from 1-5</param>
+/// <returns></returns>
     private AirportAdditionError CheckAirportFields(String id, String city, DateTime dateVisited, int rating)
     {
-        if (id.Length < 3 || id.Length > 4)
+        if (id.Length <  MIN_ID_LENGTH || id.Length > MAX_ID_LENGTH)
         {
             return AirportAdditionError.InvalidIdLength;
         }
-        if (city.Length < 3)
+        if (city.Length < MIN_ID_LENGTH)
         {
             return AirportAdditionError.InvalidCityLength;
         }
-        if (rating < 1 || rating > MAX_RATING)
+        if (rating < MIN_RATING || rating > MAX_RATING)
         {
             return AirportAdditionError.InvalidRating;
         }
@@ -56,6 +76,14 @@ public class BusinessLogic : IBusinessLogic
     }
 
 
+/// <summary>
+/// Adds a new airport to the DB. It grabs these fields from the popup, but since it knows the UserId, we add that from elsewhere
+/// </summary>
+/// <param name="id"></param>
+/// <param name="city"></param>
+/// <param name="dateVisited"></param>
+/// <param name="rating"></param>
+/// <returns>An error if the pilot has already visited the airport. You can't stamp it twice</returns>
     public AirportAdditionError AddAirport(String id, String city, DateTime dateVisited, int rating)
     {
 
@@ -65,11 +93,11 @@ public class BusinessLogic : IBusinessLogic
             return result;
         }
 
-        if (db.SelectAirport(id) != null)
+        if (db.SelectAirport(id, UserId) != null)           // we do not allow duplicate airport visits by one user ... we might regret that
         {
             return AirportAdditionError.DuplicateAirportId;
         }
-        Airport airport = new Airport(id, city, dateVisited, rating);
+        Airport airport = new Airport(id, UserId, city, dateVisited, rating);
         db.InsertAirport(airport);
 
         return AirportAdditionError.NoError;
@@ -78,7 +106,7 @@ public class BusinessLogic : IBusinessLogic
     public AirportDeletionError DeleteAirport(String id)
     {
 
-        var entry = db.SelectAirport(id);
+        var entry = db.SelectAirport(id, UserId);
 
         if (entry != null)
         {
@@ -109,7 +137,7 @@ public class BusinessLogic : IBusinessLogic
             return AirportEditError.InvalidFieldError;
         }
 
-        var airport = db.SelectAirport(id);
+        var airport = db.SelectAirport(id, UserId);
         airport.Id = id;
         airport.City = city;
         airport.DateVisited = dateVisited;
@@ -130,20 +158,23 @@ public class BusinessLogic : IBusinessLogic
         FlyWisconsinLevel nextLevel;
         int numAirportsUntilNextLevel;
 
-        int numAirportsVisited = db.SelectAllAirports().Count;
-        if(numAirportsVisited < BRONZE_LEVEL)
+        int numAirportsVisited = db.SelectAllAirports(UserId).Count;
+        if (numAirportsVisited < BRONZE_LEVEL)
         {
             nextLevel = FlyWisconsinLevel.Bronze;
             numAirportsUntilNextLevel = BRONZE_LEVEL - numAirportsVisited;
-        } else if(numAirportsVisited < SILVER_LEVEL)
+        }
+        else if (numAirportsVisited < SILVER_LEVEL)
         {
             nextLevel = FlyWisconsinLevel.Silver;
             numAirportsUntilNextLevel = SILVER_LEVEL - numAirportsVisited;
-        } else if(numAirportsVisited < GOLD_LEVEL)
+        }
+        else if (numAirportsVisited < GOLD_LEVEL)
         {
             nextLevel = FlyWisconsinLevel.Gold;
             numAirportsUntilNextLevel = GOLD_LEVEL - numAirportsVisited;
-        } else
+        }
+        else
         {
             nextLevel = FlyWisconsinLevel.None;
             numAirportsUntilNextLevel = 0;
@@ -155,12 +186,13 @@ public class BusinessLogic : IBusinessLogic
 
     public ObservableCollection<Airport> GetAirports()
     {
-        return db.SelectAllAirports();
+        return db.SelectAllAirports(UserId);
     }
 
     public ObservableCollection<Resource> GetResources()
     {
         return db.SelectAllResources();
     }
+
 }
 
